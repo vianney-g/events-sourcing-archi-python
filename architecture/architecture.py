@@ -3,10 +3,10 @@ from abc import ABC, abstractmethod
 from collections.abc import Iterable
 from dataclasses import field
 from datetime import datetime
-from typing import ClassVar, Protocol, Self
+from typing import Any, ClassVar, Protocol, Self
 from uuid import uuid4
 
-from pydantic import BaseModel, ConfigDict, Field, Json
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class Event[A: "Aggregate"](ABC, BaseModel):
@@ -179,5 +179,5 @@ class Command[U: UnitOfWork](Protocol):
     They are bounded to a unit of work.
     """
 
-    def __call__(self, uow: U) -> Result[Json, Json]:
+    def __call__(self, uow: U) -> Any:
         ...
